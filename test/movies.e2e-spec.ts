@@ -65,9 +65,7 @@ describe('MoviesController (e2e)', () => {
     const response = await request(app.getHttpServer())
       .get('/movies/prizeInterval')
       .expect(200); 
-      console.log('response', response.body);
-      console.log('expected', expectedResponse);
-      
+
       expect(response.body).toMatchObject(expectedResponse);
   });
 
