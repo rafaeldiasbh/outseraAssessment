@@ -58,14 +58,16 @@ describe('MoviesController (e2e)', () => {
         { producer: 'Producer 2', interval: 1, previousWin: 2018, followingWin: 2019 },
       ],
       max: [
-        { producer: 'Producer 1', interval: 99, previousWin: 1900, followingWin: 1999 },
-        { producer: 'Producer 2', interval: 80, previousWin: 2019, followingWin: 2099 },
+        { producer: 'Producer 1', interval: 99, previousWin: 1900, followingWin: 1999 }
       ],
     };
-
+    
     const response = await request(app.getHttpServer())
       .get('/movies/prizeInterval')
       .expect(200); 
+      console.log('response', response.body);
+      console.log('expected', expectedResponse);
+      
       expect(response.body).toMatchObject(expectedResponse);
   });
 

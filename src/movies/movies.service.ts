@@ -128,8 +128,8 @@ export class MoviesService {
     const maxInterval = intervals.max.filter(item => item.interval === maxIntervalValue);
 
     const newObject = {
-        min: [minInterval],
-        max: [maxInterval]
+        min: minInterval,
+        max: maxInterval
       };
     return newObject;
   }
