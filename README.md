@@ -48,15 +48,23 @@ localhost:3000/doc
 
 ## Run tests
 
+The integrations test required on the assessment is located on the file:
+./test/movies.e2e-spec.ts
+
+The object expected for assert is located on line 49
+The .csv to be importer must be placed on the directory:
+/db/movielist.csv
+
 ```bash
 # unit tests
 $ npm run test
 
-# e2e tests
+# e2e tests (integration tests)
 $ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
+# for integration watchmode run
+$ npm run test:e2e:watch
+
 ```
 
 ## Run in Production

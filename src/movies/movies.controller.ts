@@ -5,6 +5,7 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiQuery } from '@nestjs/swagger';
 import { Movie } from './entities/movie.entity';
 
+
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
@@ -45,5 +46,9 @@ export class MoviesController {
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.moviesService.remove(+id);
+  }
+
+  async initializeDatabase(): Promise<Movie[]>{
+    return this.moviesService.initializeDatabaseWithDefaultData();
   }
 }

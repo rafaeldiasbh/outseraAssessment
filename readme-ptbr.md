@@ -45,6 +45,14 @@ localhost:3000/doc
 
 
 ## Executar testes
+
+O teste de integração requirido no assesment se encontra no diretório
+./test/movies.e2e-spec.ts
+
+O objeto esperado como resultado está na linha 49.
+O arquivo .csv à ser importado deve ser colocado no diretório
+/db/movielist.csv
+
 ```bash
 # testes unitários
 $ npm run test
@@ -52,8 +60,9 @@ $ npm run test
 # testes de integração (e2e)
 $ npm run test:e2e
 
-# cobertura de testes
-$ npm run test:cov
+# para watchmode do teste de ingração use
+$ npm run test:e2e:watch
+
 ```
 
 ## Executando em Produção

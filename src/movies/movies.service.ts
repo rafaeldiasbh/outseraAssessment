@@ -4,6 +4,8 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOptionsWhere, Like } from 'typeorm';
 import { Movie } from  './entities/movie.entity';
+import * as fs from 'fs';
+import * as csv from 'csv-parser';
 
 @Injectable()
 export class MoviesService {
@@ -132,5 +134,45 @@ export class MoviesService {
         max: maxInterval
       };
     return newObject;
+  }
+
+  async initializeDatabaseWithDefaultData(): Promise<Movie[]>{
+    const movies: Movie[] = [];
+    return new Promise((resolve, reject) => {
+      const path = './db/movielist.csv';
+      if(fs.existsSync(path)){
+        fs.createReadStream(path).pipe(csv({ separator: ';' }))
+        .on('data', (row)=> {
+          console.log(row);
+          const movie = new Movie();
+          movie.year = parseInt(row.year);
+          movie.title = row.title;
+          movie.studios = row.studios;
+          movie.producers = row.producers;
+          movie.winner = row.winner && row.winner.toLowerCase() === 'yes';
+          movies.push(movie);
+        })
+        .on('end', async () =>{
+          try{
+            console.log('Defalt data from csv initialized');
+            resolve(movies);
+          }catch(error){
+            if(error.code !== 'SQLITE_CONSTRAINT'){
+              console.log('Incorrect CSV file check if the delimiter is ;');
+              console.log(error.code);
+              console.log(error);
+              throw error;
+            }
+            console.log('File alredy imported skiping');
+            resolve([]);
+          }
+          
+        })
+        .on('error', (error) => {
+          console.log('app.service Error initializing default Database values check if its a compatbile .csv file with ; delimiter ', error);
+          reject(error);
+        });
+      }
+    });
   }
 }
