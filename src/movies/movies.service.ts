@@ -121,6 +121,12 @@ export class MoviesService {
       }
     });
 
-    return intervals;
+    const minInterval = intervals.min.reduce((min, current) => (current.interval < min.interval ? current : min), intervals.min[0]);
+    const maxInterval = intervals.max.reduce((max, current) => (current.interval > max.interval ? current : max), intervals.max[0])
+    const newObject = {
+        min: [minInterval],
+        max: [maxInterval]
+      };
+    return newObject;
   }
 }
