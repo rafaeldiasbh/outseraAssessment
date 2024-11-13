@@ -40,6 +40,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+Project runs on localhost:3000
+route GET into root localhost:3000 should return 'Hello World!' if the project is running.
+
+There is a CRUD documentation on route:
+localhost:3000/doc
+
 ## Run tests
 
 ```bash

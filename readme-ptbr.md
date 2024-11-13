@@ -37,6 +37,13 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+O projeto roda em localhost:3000
+a rota GET na raiz localhost:3000 deve retornar 'Hello World!' caso o projeto rode normalmente.
+
+Existe uma documentação das rotas e do CRUD com exemplos na rota:
+localhost:3000/doc
+
+
 ## Executar testes
 ```bash
 # testes unitários
