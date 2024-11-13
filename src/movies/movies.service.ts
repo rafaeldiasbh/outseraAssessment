@@ -121,8 +121,12 @@ export class MoviesService {
       }
     });
 
-    const minInterval = intervals.min.reduce((min, current) => (current.interval < min.interval ? current : min), intervals.min[0]);
-    const maxInterval = intervals.max.reduce((max, current) => (current.interval > max.interval ? current : max), intervals.max[0])
+    const minIntervalValue = Math.min(...intervals.min.map(item => item.interval));
+    const minInterval = intervals.min.filter(item => item.interval === minIntervalValue);  
+
+    const maxIntervalValue = Math.max(...intervals.max.map(item => item.interval));
+    const maxInterval = intervals.max.filter(item => item.interval === maxIntervalValue);
+
     const newObject = {
         min: [minInterval],
         max: [maxInterval]
